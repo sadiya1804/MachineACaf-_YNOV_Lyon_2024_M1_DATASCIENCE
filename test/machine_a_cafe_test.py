@@ -63,8 +63,10 @@ class MyTestCase(unittest.TestCase):
         carte = CarteFake.default()
         lecteur_cb.simuler_carte_détectée(carte)
 
+        matcher = BrewerMatcher()
+
         # ALORS l'argent n'est pas débité
-        self.assertEqual(0, carte.somme_operations_en_centimes())
+        matcher.assertAmountCharged(carte, 0)
 
     def test_sans_detection_cb(self):
         # ETANT DONNE une machine a café
