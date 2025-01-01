@@ -6,7 +6,6 @@ class BrewerSpy(BrewerInterface):
         self.__has_water = True
         self.__has_coffee = True
 
-
     def make_a_coffee(self) -> bool:
         if not self.__has_water or not self.__has_coffee:
             return False
@@ -27,3 +26,14 @@ class BrewerSpy(BrewerInterface):
 
     def pour_sugar(self) -> bool:
         pass
+
+    def pour_chocolate(self) -> bool:
+        pass
+
+    def simulate_no_water(self):
+        self.__has_water = False
+        return self
+    
+    def simulate_no_coffee(self):
+        self.__has_coffee = False
+        return self
