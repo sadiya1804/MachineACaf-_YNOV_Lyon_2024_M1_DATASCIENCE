@@ -28,3 +28,6 @@ class BrewerMatcher(unittest.TestCase):
     
     def assertCappuccinoOrdered(self, brewer):
         self.assertTrue(brewer.add_capuccino_appelé())
+    
+    def assertNoChocolateOrdered(self, brewer):
+        self.assertFalse(brewer.add_chocolate_appelé())
