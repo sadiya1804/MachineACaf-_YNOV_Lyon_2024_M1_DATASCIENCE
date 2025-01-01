@@ -6,6 +6,7 @@ from utilities.carte_fake import CarteFake
 from utilities.lecteur_cb_pour_les_tests import LecteurCbFake
 from utilities.machine_a_cafe_builder import MachineACaféBuilder
 from utilities.brewer_spy import BrewerSpy
+from utilities.cup_provider_spy import CupProviderSpy
 
 class MyTestCase(unittest.TestCase):
     def test_cas_nominal(self):
