@@ -60,6 +60,10 @@ class BrewerSpy(ExtendedBrewerInterface):
         self.__has_coffee = False
         return self
     
+    def simulate_no_chocolate(self):
+        self.__has_chocolate = False
+        return self
+    
     def add_chocolate_appelé(self):
         return self.__add_chocolate_appelé
     
