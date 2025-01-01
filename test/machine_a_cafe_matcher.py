@@ -7,11 +7,9 @@ from utilities.brewer_spy import BrewerSpy
 from utilities.cup_provider_spy import CupProviderSpy
 
 class BrewerMatcher(unittest.TestCase):
-    def __init__(self):
-        self.__brewer = BrewerSpy()
-        self.__lecteur_cb = LecteurCbFake()
-        self.__machine_a_cafe = (MachineACaféBuilder()
-                           .ayant_pour_brewer(self.__brewer)
-                           .ayant_pour_lecteur_cb(self.__lecteur_cb)
-                           .build())
-        self.__carte = CarteFake.default()
+
+    def assertCoffeeOrdered(self, brewer):
+        self.assertTrue(brewer.make_a_coffee_appelé())
+
+    def assertAmountCharged(self, card, expected_amount):
+        self.assertEqual(expected_amount, card.somme_operations_en_centimes())

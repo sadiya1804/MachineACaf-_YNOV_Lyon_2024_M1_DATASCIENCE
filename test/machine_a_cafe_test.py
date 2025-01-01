@@ -7,6 +7,8 @@ from utilities.lecteur_cb_pour_les_tests import LecteurCbFake
 from utilities.machine_a_cafe_builder import MachineACaféBuilder
 from utilities.brewer_spy import BrewerSpy
 from utilities.cup_provider_spy import CupProviderSpy
+from machine_a_cafe_matcher import BrewerMatcher
+
 
 class MyTestCase(unittest.TestCase):
     def test_cas_nominal(self):
@@ -21,12 +23,13 @@ class MyTestCase(unittest.TestCase):
         # QUAND une carte approvisionnée est détectée
         carte = CarteFake.default()
         lecteur_cb.simuler_carte_détectée(carte)
-
+        
+        matcher = BrewerMatcher()
         # ALORS un café est commandé au hardware
-        self.assertTrue(brewer.make_a_coffee_appelé())
+        matcher.assertCoffeeOrdered(brewer)
 
-        # # ET le prix d'un café est débité
-        self.assertEqual(-50, carte.somme_operations_en_centimes())
+        # ET le prix d'un café est débité
+        matcher.assertAmountCharged(carte, -50)
 
     def test_sans_provision(self):
         # ETANT DONNE une machine a café
