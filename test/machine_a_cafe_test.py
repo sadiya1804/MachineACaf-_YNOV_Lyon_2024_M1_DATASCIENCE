@@ -115,8 +115,9 @@ class MyTestCase(unittest.TestCase):
         carte = CarteFake.default()
         lecteur_cb.simuler_carte_détectée(carte)
 
+        matcher = BrewerMatcher()
         # ALORS aucun café n'est commandé au hardware
-        self.assertFalse(brewer.make_a_coffee_appelé())
+        matcher.assertNoCoffeeOrdered(brewer)
 
     def test_fourniture_gobelet(self):
         # ETANT DONNE une machine à café sans tasse détectée
