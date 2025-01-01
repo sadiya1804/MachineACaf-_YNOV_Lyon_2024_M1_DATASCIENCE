@@ -169,5 +169,25 @@ class MyTestCase(unittest.TestCase):
         # Et le montant total est 50 + 70 = 120
         self.assertEqual(-120, carte.somme_operations_en_centimes())
 
+    def test_add_capuccino(self):
+        # ETANT DONNE une machine à café
+        brewer = BrewerSpy()
+        lecteur_cb = LecteurCbFake()
+        machine_a_cafe = (MachineACaféBuilder()
+                          .ayant_pour_brewer(brewer)
+                          .ayant_pour_lecteur_cb(lecteur_cb)
+                          .build())
+
+        # QUAND un utilisateur commande un capuccino
+        carte = CarteFake.default()
+        machine_a_cafe._credit_card_callback(carte)
+        machine_a_cafe._capuccino_callback(carte)
+
+        # ALORS le capuccino est commandé
+        self.assertTrue(brewer.add_capuccino_appelé())
+
+        # Et le montant total est 50 + 80 = 130
+        self.assertEqual(-130, carte.somme_operations_en_centimes())    
+
 if __name__ == '__main__':
     unittest.main()
