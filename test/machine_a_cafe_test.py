@@ -134,11 +134,12 @@ class MyTestCase(unittest.TestCase):
         carte = CarteFake.default()
         machine_a_cafe._credit_card_callback(carte)
 
-        # ALORS la machine fournit un gobelet
-        self.assertTrue(cup_provider.provide_cup_called())
+        matcher = BrewerMatcher()
 
+        # ALORS la machine fournit un gobelet
+        matcher.assertCupProvided(cup_provider)
         # ET le café est commandé
-        self.assertTrue(brewer.make_a_coffee_appelé())
+        matcher.assertCoffeeOrdered(brewer)
     
     def test_add_chocolate(self):
         # ETANT DONNE une machine à café
