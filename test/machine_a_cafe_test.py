@@ -108,6 +108,26 @@ class MyTestCase(unittest.TestCase):
         # ALORS aucun café n'est commandé au hardware
         self.assertFalse(brewer.make_a_coffee_appelé())
 
+    def test_fourniture_gobelet(self):
+        # ETANT DONNE une machine à café sans tasse détectée
+        cup_provider = CupProviderSpy(cup_present=False)
+        brewer = BrewerSpy()
+        lecteur_cb = LecteurCbFake()
+        machine_a_cafe = (MachineACaféBuilder()
+                          .ayant_pour_brewer(brewer)
+                          .ayant_pour_lecteur_cb(lecteur_cb)
+                          .ayant_pour_cup_provider(cup_provider)
+                          .build())
+        
+        # QUAND un utilisateur commande un produit
+        carte = CarteFake.default()
+        machine_a_cafe._credit_card_callback(carte)
+
+        # ALORS la machine fournit un gobelet
+        self.assertTrue(cup_provider.provide_cup_called())
+
+        # ET le café est commandé
+        self.assertTrue(brewer.make_a_coffee_appelé())
     
 if __name__ == '__main__':
     unittest.main()
