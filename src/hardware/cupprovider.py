@@ -1,6 +1,5 @@
 import abc
 
-
 class CupProviderInterface(abc.ABC):
     # Relâche une touillette, sans possibilité de savoir si l'action a été efficace
     @abc.abstractmethod
