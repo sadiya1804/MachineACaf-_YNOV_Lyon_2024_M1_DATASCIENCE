@@ -16,3 +16,5 @@ class BrewerMatcher(unittest.TestCase):
 
     def assertAmountCharged(self, card, expected_amount):
         self.assertEqual(expected_amount, card.somme_operations_en_centimes())
+
+    
