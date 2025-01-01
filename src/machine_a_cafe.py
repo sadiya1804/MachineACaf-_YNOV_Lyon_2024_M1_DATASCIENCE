@@ -44,3 +44,17 @@ class MachineACafé:
         brewing_success = self._brewer.pour_latte()
         if not brewing_success:
             card_handle.refund(70)
+    
+    def _capuccino_callback(self, card_handle: CardHandleInterface) -> bool:
+        if self._cup_provider and not self._cup_provider.is_cup_present():
+            self._cup_provider.provide_cup()
+
+        debit_success = card_handle.try_charge_amount(80)
+        if not debit_success:
+            return False
+
+        brewing_success = self._brewer.pour_capuccino()
+        if not brewing_success:
+            card_handle.refund(80)
+            return False
+        return True

@@ -1,12 +1,17 @@
 from hardware.brewer import BrewerInterface
+from extended_brewer_interface import ExtendedBrewerInterface
 
-class BrewerSpy(BrewerInterface):
+class BrewerSpy(ExtendedBrewerInterface):
     def __init__(self):
         self.__make_a_coffee_appelé = False
         self.__has_water = True
         self.__has_coffee = True
         self.__add_chocolate_appelé = False
+        self.__add_latte_appelé = False
+        self.__add_capuccino_appelé = False
         self.__has_chocolate = True
+        self.__has_latte = True
+        self.__has_capuccino = True
 
     def make_a_coffee(self) -> bool:
         if not self.__has_water or not self.__has_coffee:
@@ -35,6 +40,18 @@ class BrewerSpy(BrewerInterface):
         self.__add_chocolate_appelé = True
         return True
 
+    def pour_latte(self) -> bool:
+        if not self.__has_latte:
+            return False
+        self.__add_latte_appelé = True
+        return True  
+
+    def pour_capuccino(self) -> bool:
+        if not self.__has_capuccino: 
+            return False
+        self.__add_capuccino_appelé = True        
+        return True  
+
     def simulate_no_water(self):
         self.__has_water = False
         return self
@@ -45,3 +62,9 @@ class BrewerSpy(BrewerInterface):
     
     def add_chocolate_appelé(self):
         return self.__add_chocolate_appelé
+    
+    def add_latte_appelé(self):
+        return self.__add_latte_appelé
+    
+    def add_capuccino_appelé(self):
+        return self.__add_capuccino_appelé
