@@ -239,11 +239,13 @@ class MyTestCase(unittest.TestCase):
         carte = CarteFake.default()
         machine_a_cafe._credit_card_callback(carte)
 
+        matcher = BrewerMatcher()
+
         # ALORS le latte n'est pas commandé
-        self.assertFalse(brewer.add_latte_appelé())
+        matcher.assertNoLatteOrdered(brewer)
 
         # Et le montant total est 50
-        self.assertEqual(-50, carte.somme_operations_en_centimes())
+        matcher.assertAmountCharged(carte, -50)
 
     def test_no_capuccino(self):
         # ETANT DONNE une machine à café
