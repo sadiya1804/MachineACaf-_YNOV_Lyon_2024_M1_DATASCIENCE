@@ -2,12 +2,10 @@ import unittest
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-from utilities.brewer_surveillant_les_appels import BrewerSpy
 from utilities.carte_fake import CarteFake
 from utilities.lecteur_cb_pour_les_tests import LecteurCbFake
 from utilities.machine_a_cafe_builder import MachineACaféBuilder
 from utilities.brewer_spy import BrewerSpy
-
 
 class MyTestCase(unittest.TestCase):
     def test_cas_nominal(self):
@@ -23,9 +21,6 @@ class MyTestCase(unittest.TestCase):
         carte = CarteFake.default()
         lecteur_cb.simuler_carte_détectée(carte)
 
-       # matcher = BrewerMatcher()
-        # matcher.assertCoffeeOrdered(brewer)
-        # matcher.assertAmountCharged(carte, -50)
         # ALORS un café est commandé au hardware
         self.assertTrue(brewer.make_a_coffee_appelé())
 
@@ -113,5 +108,6 @@ class MyTestCase(unittest.TestCase):
         # ALORS aucun café n'est commandé au hardware
         self.assertFalse(brewer.make_a_coffee_appelé())
 
+    
 if __name__ == '__main__':
     unittest.main()
