@@ -196,11 +196,12 @@ class MyTestCase(unittest.TestCase):
         machine_a_cafe._credit_card_callback(carte)
         machine_a_cafe._capuccino_callback(carte)
 
-        # ALORS le capuccino est commandé
-        self.assertTrue(brewer.add_capuccino_appelé())
+        matcher = BrewerMatcher()
 
+        # ALORS le capuccino est commandé
+        matcher.assertCappuccinoOrdered(brewer)
         # Et le montant total est 50 + 80 = 130
-        self.assertEqual(-130, carte.somme_operations_en_centimes())    
+        matcher.assertAmountCharged(carte, -130)
 
     def test_no_chocolate(self):
         # ETANT DONNE une machine à café
